@@ -1,1 +1,11 @@
 
+{
+  "name": "fasalsetu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FasalSetu hackathon demo — market and shared transport API",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}
