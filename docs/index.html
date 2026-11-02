@@ -26,131 +26,310 @@
 .receipt-row b{color:var(--ink)}
 .receipt-amount{color:var(--green);font-size:16px}
 .txn-id{font-family:monospace;font-size:11px;color:#555}</style></head>
-<body><header class="top"><div class="brand"><span class="brand-mark">⌁</span> FasalSetu</div><nav><a href="#markets">Mandi prices</a><a href="#transport">Shared transport</a><a href="#how">How it works</a></nav><div class="header-actions"><button class="language">हिंदी / EN</button><button class="profile-button" id="profileButton"><span class="avatar">RK</span><span>Ramesh</span></button></div></header><aside class="profile-panel" id="profilePanel" aria-label="Farmer profile"><div class="profile-top"><span class="avatar">RK</span><div><strong id="profileName">Ramesh Kumar</strong><span id="profileVillage">Bawana, Delhi</span><span class="verified">✓ Verified farmer</span></div><button class="profile-close" id="closeProfile" aria-label="Close profile">×</button></div><div class="profile-section"><h4>Farmer details</h4><div class="profile-grid"><div><span>Mobile number</span><b id="profilePhone">9876543210</b></div><div><span>Farmer ID</span><b>FS-20481</b></div><div><span>Preferred language</span><b>Hindi / English</b></div><div><span>Member since</span><b>October 2026</b></div></div></div><div class="profile-section"><h4>Farm details</h4><div class="profile-grid"><div><span>Farm size</span><b>3.5 acres</b></div><div><span>Primary crops</span><b>Wheat, mustard</b></div><div><span>Village</span><b>Bawana</b></div><div><span>Bank status</span><b>✓ Verified</b></div></div></div><div class="profile-section"><button class="profile-link" id="earningsButton">My sales &amp; earnings</button><button class="profile-link" id="savedMandisButton">Saved mandis</button><button class="logout" id="logoutButton">Log out</button></div></aside><div class="earnings-modal" id="earningsModal" role="dialog" aria-modal="true" aria-label="Sales and earnings"><section class="earnings-box"><div class="earnings-title"><div><h2>My sales &amp; earnings</h2><p>Track the money earned from every mandi sale.</p></div><button class="close-modal" id="closeEarnings" aria-label="Close">×</button></div><div class="earnings-stats"><div class="earning-stat"><span>Total earnings</span><strong>₹1,42,680</strong></div><div class="earning-stat"><span>This month</span><strong class="green">₹38,420</strong></div><div class="earning-stat"><span>Sales completed</span><strong>12</strong></div></div><div class="trend"><div class="trend-head">Monthly earnings <span>↑ 18% vs last month</span></div><div class="bars"><div class="bar-item"><i style="height:31px"></i>May</div><div class="bar-item"><i style="height:44px"></i>Jun</div><div class="bar-item"><i style="height:37px"></i>Jul</div><div class="bar-item"><i style="height:55px"></i>Aug</div><div class="bar-item"><i style="height:48px"></i>Sep</div><div class="bar-item"><i class="active" style="height:67px"></i>Oct</div></div></div><div class="sales-list"><div class="sale-row"><b>Wheat <small>Azadpur Mandi · Today</small></b><span>40 qtl</span><b>₹85,280</b><span class="paid sale-status">✓ Paid</span></div><div class="sale-row"><b>Mustard <small>Narela Mandi · 22 Oct</small></b><span>15 qtl</span><b>₹89,590</b><span class="paid sale-status">✓ Paid</span></div><div class="sale-row"><b>Rice <small>Sonipat Mandi · 10 Oct</small></b><span>12 qtl</span><b>₹33,080</b><span class="pending sale-status">Pending</span></div></div></section></div><div class="payment-modal" id="paymentModal" role="dialog" aria-modal="true" aria-label="Complete pickup payment"><section class="payment-box"><div class="payment-top"><div><h2>Complete pickup payment</h2><p>Scan QR or pay via UPI Â· FasalSetu</p></div><button class="close-modal" id="closePayment" aria-label="Close">&times;</button></div><div class="payment-summary"><div class="pay-line"><span>Fixed FasalSetu platform fee</span><b>&#8377;200</b></div><div class="pay-line"><span>Distance charge &middot; 18 km (4 &times; &#8377;10)</span><b>&#8377;40</b></div><div class="pay-line pay-total"><span>Total payable</span><b>&#8377;240</b></div><p class="fee-note">&#8377;200 fixed fee + &#8377;10 per 5 km. No hidden charges.</p></div><div class="qr-section"><img src="./qr.jpg" alt="Scan to pay - Manveer Singh" class="qr-img"><p class="qr-label">Scan with GPay, PhonePe, Paytm or any UPI app</p><div class="upi-id-box"><span>UPI ID: <strong>mr.net445-4@oksbi</strong></span><button class="copy-upi" id="copyUpi">Copy</button></div></div><button class="join paid-btn" id="confirmPayment" style="width:100%;margin:0">&#10003; I&apos;ve Paid</button><button class="cancel-pay" id="cancelPayment">Cancel reservation</button><p class="secure">&#128274; Payments go directly to FasalSetu via UPI</p></section></div><div class="receipt-modal" id="receiptModal" role="dialog" aria-modal="true" aria-label="Payment receipt"><section class="receipt-box"><div class="receipt-check">&#10003;</div><h2>Payment Successful!</h2><p>Your pickup is confirmed. Safe travels to the mandi!</p><div class="receipt-card"><div class="receipt-row"><span>Farmer</span><b id="rFarmer">Ramesh Kumar</b></div><div class="receipt-row"><span>Amount Paid</span><b class="receipt-amount">&#8377;240</b></div><div class="receipt-row"><span>Paid to (UPI)</span><b>mr.net445-4@oksbi</b></div><div class="receipt-row"><span>Transaction ID</span><b class="txn-id" id="rTxn">FS---------</b></div><div class="receipt-row"><span>Date &amp; Time</span><b id="rDate">-</b></div><div class="receipt-row"><span>Crop &amp; Quantity</span><b id="rCrop">Wheat &middot; 4 qtl</b></div><div class="receipt-row"><span>Destination Mandi</span><b id="rMandi">Azadpur Mandi</b></div><div class="receipt-row"><span>Pickup Vehicle</span><b id="rVehicle">DL 1L 4728</b></div></div><button class="join" style="width:100%;margin:16px 0 8px" id="receiptDone">Back to Dashboard</button><p class="secure">&#128274; Keep this receipt for your records</p></section></div><main><div class="eyebrow"><span class="dot"></span> Fairer markets, from farm to mandi</div><h1>Know the price.<br>Keep the <span class="highlight">profit.</span></h1><p class="intro">Real-time mandi prices and shared transport—so every farmer can choose the sale that puts more money in their pocket.</p><div class="stats"><div class="stat"><strong>₹2,140</strong><span>today's best wheat price</span></div><div class="stat"><strong>18 km</strong><span>nearest shared pickup</span></div><div class="stat"><strong>+16%</strong><span>more net income</span></div></div><section class="dashboard" id="markets"><div class="dash-head"><div class="greeting"><h2>Namaste, Ramesh 👋</h2><p>See what your wheat can earn today.</p></div><div class="weather"><span class="sun">☀️</span><span>28°C<br>Clear skies</span></div></div><form class="search-crop" id="cropSearch"><input id="cropInput" list="crops" value="wheat" aria-label="Search crop price" placeholder="Search crop price"><datalist id="crops"><option value="wheat"><option value="rice"><option value="mustard"><option value="sugarcane"><option value="maize"><option value="potato"><option value="cotton"><option value="tomato"></datalist><button type="submit">Search live price</button></form><div class="search-hint">Try: wheat, rice, mustard, sugarcane, maize, potato, cotton, or tomato · Prices update every few seconds</div><div class="tabs"><button class="tab active" id="selectedCrop">Wheat · 40 qtl</button><button class="tab">Add crop +</button></div><div class="market-grid"><article class="card"><div class="card-label"><span>Nearby mandi prices</span><span class="live"><i></i>LIVE <span class="updated" id="updatedAt">updating…</span></span></div><div class="market"><div><strong>Azadpur Mandi</strong><br><small>18 km away</small></div><div class="price">₹2,140</div><div><small>₹320 trip</small></div><span class="best">BEST PROFIT</span></div><div class="market"><div><strong>Narela Mandi</strong><br><small>26 km away</small></div><div class="price">₹2,180</div><div><small>₹560 trip</small></div><span></span></div><div class="market"><div><strong>Sonipat Mandi</strong><br><small>35 km away</small></div><div class="price">₹2,205</div><div><small>₹760 trip</small></div><span></span></div></article><article class="card profit"><h3>Your best estimated payout</h3><div class="profit-number">₹85,280 <small>net</small></div><p>After ₹320 shared transport cost</p><div class="bar"><span></span></div><footer><span>Market price ₹85,600</span><span>99.6% kept</span></footer></article><article class="card transport" id="transport"><div class="truck">🚚</div><div class="transport-copy"><h3>Choose your pickup truck</h3><p id="truckInfo">100-ton truck · 3 farmers nearby · Pickup today, 3:30 PM</p><div class="truck-options"><button class="truck-option active" data-trip="azadpur-1530" data-capacity="100" data-vehicle="DL 1L 4728" data-time="3:30 PM">100 tons</button><button class="truck-option" data-trip="azadpur-1630" data-capacity="200" data-vehicle="DL 1M 8391" data-time="4:30 PM">200 tons</button><button class="truck-option" data-trip="azadpur-1730" data-capacity="300" data-vehicle="DL 1N 6520" data-time="5:30 PM">300 tons</button></div></div><button class="join" id="joinButton">Join pickup</button></article><article class="card pickup-live"><div class="pickup-head"><h3>Live pickup location</h3><span class="tracking"><i></i>GPS TRACKING</span></div><div class="route"><span class="stop start"></span><span class="route-label left">Bawana Farm</span><span class="truck-marker" aria-label="Truck moving">🚚</span><span class="stop end"></span><span class="route-label right">Azadpur Mandi</span></div><div class="pickup-meta"><span><strong id="pickupStatus">Driver is 12 min away</strong><br>Vehicle: <span id="liveVehicle">DL 1L 4728</span></span><span id="pickupDistance">4.8 km remaining</span></div></article></div></section><div class="bottom" id="how"><div class="trust"><strong>Transparent prices.</strong> Verified market data, shared with your community.</div><button class="cta" id="demoButton">See how FasalSetu works →</button></div></main><script>
+<body><header class="top"><div class="brand"><span class="brand-mark">⌁</span> FasalSetu</div><nav><a href="#markets">Mandi prices</a><a href="#transport">Shared transport</a><a href="#how">How it works</a></nav><div class="header-actions"><button class="language">हिंदी / EN</button><button class="profile-button" id="profileButton"><span class="avatar">RK</span><span>Ramesh</span></button></div></header><aside class="profile-panel" id="profilePanel" aria-label="Farmer profile"><div class="profile-top"><span class="avatar">RK</span><div><strong id="profileName">Ramesh Kumar</strong><span id="profileVillage">Bawana, Delhi</span><span class="verified">✓ Verified farmer</span></div><button class="profile-close" id="closeProfile" aria-label="Close profile">×</button></div><div class="profile-section"><h4>Farmer details</h4><div class="profile-grid"><div><span>Mobile number</span><b id="profilePhone">9876543210</b></div><div><span>Farmer ID</span><b>FS-20481</b></div><div><span>Preferred language</span><b>Hindi / English</b></div><div><span>Member since</span><b>October 2026</b></div></div></div><div class="profile-section"><h4>Farm details</h4><div class="profile-grid"><div><span>Farm size</span><b>3.5 acres</b></div><div><span>Primary crops</span><b>Wheat, mustard</b></div><div><span>Village</span><b>Bawana</b></div><div><span>Bank status</span><b>✓ Verified</b></div></div></div><div class="profile-section"><button class="profile-link" id="earningsButton">My sales &amp; earnings</button><button class="profile-link" id="savedMandisButton">Saved mandis</button><button class="logout" id="logoutButton">Log out</button></div></aside><div class="earnings-modal" id="earningsModal" role="dialog" aria-modal="true" aria-label="Sales and earnings"><section class="earnings-box"><div class="earnings-title"><div><h2>My sales &amp; earnings</h2><p>Track the money earned from every mandi sale.</p></div><button class="close-modal" id="closeEarnings" aria-label="Close">×</button></div><div class="earnings-stats"><div class="earning-stat"><span>Total earnings</span><strong>₹1,42,680</strong></div><div class="earning-stat"><span>This month</span><strong class="green">₹38,420</strong></div><div class="earning-stat"><span>Sales completed</span><strong>12</strong></div></div><div class="trend"><div class="trend-head">Monthly earnings <span>↑ 18% vs last month</span></div><div class="bars"><div class="bar-item"><i style="height:31px"></i>May</div><div class="bar-item"><i style="height:44px"></i>Jun</div><div class="bar-item"><i style="height:37px"></i>Jul</div><div class="bar-item"><i style="height:55px"></i>Aug</div><div class="bar-item"><i style="height:48px"></i>Sep</div><div class="bar-item"><i class="active" style="height:67px"></i>Oct</div></div></div><div class="sales-list"><div class="sale-row"><b>Wheat <small>Azadpur Mandi · Today</small></b><span>40 qtl</span><b>₹85,280</b><span class="paid sale-status">✓ Paid</span></div><div class="sale-row"><b>Mustard <small>Narela Mandi · 22 Oct</small></b><span>15 qtl</span><b>₹89,590</b><span class="paid sale-status">✓ Paid</span></div><div class="sale-row"><b>Rice <small>Sonipat Mandi · 10 Oct</small></b><span>12 qtl</span><b>₹33,080</b><span class="pending sale-status">Pending</span></div></div></section></div><div class="payment-modal" id="paymentModal" role="dialog" aria-modal="true" aria-label="Complete pickup payment"><section class="payment-box"><div class="payment-top"><div><h2>Complete pickup payment</h2><p>Scan QR or pay via UPI Â· FasalSetu</p></div><button class="close-modal" id="closePayment" aria-label="Close">&times;</button></div><div class="payment-summary"><div class="pay-line"><span>Fixed FasalSetu platform fee</span><b>&#8377;200</b></div><div class="pay-line"><span>Distance charge &middot; 18 km (4 &times; &#8377;10)</span><b>&#8377;40</b></div><div class="pay-line pay-total"><span>Total payable</span><b>&#8377;240</b></div><p class="fee-note">&#8377;200 fixed fee + &#8377;10 per 5 km. No hidden charges.</p></div><div class="qr-section"><img src="./qr.jpg" alt="Scan to pay - Manveer Singh" class="qr-img"><p class="qr-label">Scan with GPay, PhonePe, Paytm or any UPI app</p><div class="upi-id-box"><span>UPI ID: <strong>mr.net445-4@oksbi</strong></span><button class="copy-upi" id="copyUpi">Copy</button></div></div><button class="join paid-btn" id="confirmPayment" style="width:100%;margin:0">&#10003; I&apos;ve Paid</button><button class="cancel-pay" id="cancelPayment">Cancel reservation</button><p class="secure">&#128274; Payments go directly to FasalSetu via UPI</p></section></div><div class="receipt-modal" id="receiptModal" role="dialog" aria-modal="true" aria-label="Payment receipt"><section class="receipt-box"><div class="receipt-check">&#10003;</div><h2>Payment Successful!</h2><p>Your pickup is confirmed. Safe travels to the mandi!</p><div class="receipt-card"><div class="receipt-row"><span>Farmer</span><b id="rFarmer">Ramesh Kumar</b></div><div class="receipt-row"><span>Amount Paid</span><b class="receipt-amount">&#8377;240</b></div><div class="receipt-row"><span>Paid to (UPI)</span><b>mr.net445-4@oksbi</b></div><div class="receipt-row"><span>Transaction ID</span><b class="txn-id" id="rTxn">FS---------</b></div><div class="receipt-row"><span>Date &amp; Time</span><b id="rDate">-</b></div><div class="receipt-row"><span>Crop &amp; Quantity</span><b id="rCrop">Wheat &middot; 4 qtl</b></div><div class="receipt-row"><span>Destination Mandi</span><b id="rMandi">Azadpur Mandi</b></div><div class="receipt-row"><span>Pickup Vehicle</span><b id="rVehicle">DL 1L 4728</b></div></div><button class="join" style="width:100%;margin:16px 0 8px" id="receiptDone">Back to Dashboard</button><p class="secure">&#128274; Keep this receipt for your records</p></section></div><main><div class="eyebrow"><span class="dot"></span> Fairer markets, from farm to mandi</div><h1>Know the price.<br>Keep the <span class="highlight">profit.</span></h1><p class="intro">Real-time mandi prices and shared transport—so every farmer can choose the sale that puts more money in their pocket.</p><div class="stats"><div class="stat"><strong>₹2,140</strong><span>today's best wheat price</span></div><div class="stat"><strong>18 km</strong><span>nearest shared pickup</span></div><div class="stat"><strong>+16%</strong><span>more net income</span></div></div><section class="dashboard" id="markets"><div class="dash-head"><div class="greeting"><h2>Namaste, Ramesh 👋</h2><p>See what your wheat can earn today.</p></div><div class="weather"><span class="sun">☀️</span><span>28°C<br>Clear skies</span></div></div><form class="search-crop" id="cropSearch"><input id="cropInput" list="crops" value="wheat" aria-label="Search crop price" placeholder="Search crop price"><datalist id="crops"><option value="wheat"><option value="rice"><option value="mustard"><option value="sugarcane"><option value="maize"><option value="potato"><option value="cotton"><option value="tomato"></datalist><button type="submit">Search live price</button></form><div class="search-hint">Try: wheat, rice, mustard, sugarcane, maize, potato, cotton, or tomato · Prices update every few seconds</div><div class="tabs"><button class="tab active" id="selectedCrop">Wheat · 40 qtl</button><button class="tab">Add crop +</button></div><div class="market-grid"><article class="card"><div class="card-label"><span>Nearby mandi prices</span><span class="live"><i></i>LIVE <span class="updated" id="updatedAt">updating…</span></span></div><div class="market"><div><strong>Azadpur Mandi</strong><br><small>18 km away</small></div><div class="price">₹2,140</div><div><small>₹320 trip</small></div><span class="best">BEST PROFIT</span></div><div class="market"><div><strong>Narela Mandi</strong><br><small>26 km away</small></div><div class="price">₹2,180</div><div><small>₹560 trip</small></div><span></span></div><div class="market"><div><strong>Sonipat Mandi</strong><br><small>35 km away</small></div><div class="price">₹2,205</div><div><small>₹760 trip</small></div><span></span></div></article><article class="card profit"><h3>Your best estimated payout</h3><div class="profit-number">₹85,280 <small>net</small></div><p>After ₹320 shared transport cost</p><div class="bar"><span></span></div><footer><span>Market price ₹85,600</span><span>99.6% kept</span></footer></article><article class="card transport" id="transport"><div class="truck">🚚</div><div class="transport-copy"><h3>Choose your pickup truck</h3><p id="truckInfo">100-ton truck · 3 farmers nearby · Pickup today, 3:30 PM</p><div class="truck-options"><button class="truck-option active" data-trip="azadpur-1530" data-capacity="100" data-vehicle="DL 1L 4728" data-time="3:30 PM">100 tons</button><button class="truck-option" data-trip="azadpur-1630" data-capacity="200" data-vehicle="DL 1M 8391" data-time="4:30 PM">200 tons</button><button class="truck-option" data-trip="azadpur-1730" data-capacity="300" data-vehicle="DL 1N 6520" data-time="5:30 PM">300 tons</button></div></div><button class="join" id="joinButton">Join pickup</button></article><article class="card pickup-live"><div class="pickup-head"><h3>Live pickup location</h3><span class="tracking"><i></i>GPS TRACKING</span></div><div class="route"><span class="stop start"></span><span class="route-label left">Bawana Farm</span><span class="truck-marker" aria-label="Truck moving">🚚</span><span class="stop end"></span><span class="route-label right">Azadpur Mandi</span></div><div class="pickup-meta"><span><strong id="pickupStatus">Driver is 12 min away</strong><br>Vehicle: <span id="liveVehicle">DL 1L 4728</span></span><span id="pickupDistance">4.8 km remaining</span></div>
+<div class="cancel-booking-wrap" id="cancelBookingWrap" style="display:none;margin-top:16px;padding-top:14px;border-top:1px solid #d6e8d6;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+    <div>
+      <strong style="font-size:13px;color:#17352d;">Pickup booked!</strong>
+      <div id="bookingInfo" style="font-size:11px;color:#697a74;margin-top:2px;">Vehicle: DL 1L 4728 · Today, 3:30 PM</div>
+    </div>
+    <button id="cancelBookingBtn" style="border:1px solid #b45c3f;background:#fff5f3;color:#b45c3f;border-radius:9px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">
+      Cancel Booking
+    </button>
+  </div>
+</div></article></div></section><div class="bottom" id="how"><div class="trust"><strong>Transparent prices.</strong> Verified market data, shared with your community.</div><button class="cta" id="demoButton">See how FasalSetu works →</button></div></main><script>
+// ── Auth guard ──────────────────────────────────────────────────
 if (!localStorage.getItem('fasalsetuUser')) location.replace('./login.html');
 const signedInFarmer = JSON.parse(localStorage.getItem('fasalsetuUser') || '{}');
-if (signedInFarmer.name) { document.getElementById('profileName').textContent = signedInFarmer.name; document.getElementById('profileVillage').textContent = signedInFarmer.village || 'Bawana, Delhi'; document.getElementById('profilePhone').textContent = signedInFarmer.phone || '9876543210'; document.querySelector('.profile-button span:last-child').textContent = signedInFarmer.name.split(' ')[0]; }
+if (signedInFarmer.name) {
+  document.getElementById('profileName').textContent = signedInFarmer.name;
+  document.getElementById('profileVillage').textContent = signedInFarmer.village || 'Bawana, Delhi';
+  document.getElementById('profilePhone').textContent = signedInFarmer.phone || '9876543210';
+  document.querySelector('.profile-button span:last-child').textContent = signedInFarmer.name.split(' ')[0];
+}
+
+// ── Profile panel ───────────────────────────────────────────────
 const profilePanel = document.getElementById('profilePanel');
-document.getElementById('profileButton').addEventListener('click', event => { event.stopPropagation(); profilePanel.classList.toggle('open'); });
+document.getElementById('profileButton').addEventListener('click', e => { e.stopPropagation(); profilePanel.classList.toggle('open'); });
 document.getElementById('closeProfile').addEventListener('click', () => profilePanel.classList.remove('open'));
-document.addEventListener('click', event => { if (!profilePanel.contains(event.target) && !document.getElementById('profileButton').contains(event.target)) profilePanel.classList.remove('open'); });
-document.addEventListener('keydown', event => { if (event.key === 'Escape') profilePanel.classList.remove('open'); });
+document.addEventListener('click', e => { if (!profilePanel.contains(e.target) && !document.getElementById('profileButton').contains(e.target)) profilePanel.classList.remove('open'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') profilePanel.classList.remove('open'); });
 document.getElementById('logoutButton').addEventListener('click', () => { localStorage.removeItem('fasalsetuUser'); localStorage.removeItem('fasalsetuToken'); location.assign('./login.html'); });
-document.getElementById('earningsButton').addEventListener('click', () => { document.getElementById('earningsModal').classList.add('open'); document.getElementById('profilePanel').classList.remove('open'); });
+document.getElementById('earningsButton').addEventListener('click', () => { document.getElementById('earningsModal').classList.add('open'); profilePanel.classList.remove('open'); });
 document.getElementById('closeEarnings').addEventListener('click', () => document.getElementById('earningsModal').classList.remove('open'));
-document.getElementById('earningsModal').addEventListener('click', event => { if (event.target === event.currentTarget) event.currentTarget.classList.remove('open'); });
+document.getElementById('earningsModal').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
 document.getElementById('savedMandisButton').addEventListener('click', () => alert('Saved mandis: Azadpur, Narela, and Sonipat.'));
-const fmt = value => new Intl.NumberFormat('en-IN').format(Math.round(value));
-let liveMarkets = []; let selectedCrop = 'wheat'; const quantity = 40;
+
+// ── Market price rendering ───────────────────────────────────────
+const fmt = v => new Intl.NumberFormat('en-IN').format(Math.round(v));
+let liveMarkets = [];
+let selectedCrop = 'wheat';
+const quantity = 40;
+
 function renderMarkets(markets) {
-  document.querySelectorAll('.market').forEach((row, index) => {
-    const market = markets[index]; if (!market) return;
-    const change = market.liveChange ?? 0;
+  document.querySelectorAll('.market').forEach((row, i) => {
+    const m = markets[i]; if (!m) return;
+    const change = m.liveChange ?? 0;
     const arrow = change >= 0 ? '▲' : '▼';
-    const direction = change >= 0 ? 'up' : 'down';
-    row.querySelector('strong').textContent = market.name;
-    row.querySelector('small').textContent = `${market.distanceKm} km away`;
-    row.querySelector('.price').innerHTML = `₹${fmt(market.livePrice ?? market.pricePerQuintal)}<div class="movement ${direction}">${arrow} ₹${Math.abs(change)} today</div><div class="range">Low ₹${fmt(market.dayLow)} · High ₹${fmt(market.dayHigh)}</div>`;
-    row.querySelectorAll('small')[1].textContent = `₹${fmt(market.transportCost)} trip`;
-    const badge = row.querySelector('.best'); if (badge) badge.textContent = index === 0 ? 'BEST PROFIT' : '';
+    const dir   = change >= 0 ? 'up' : 'down';
+    row.querySelector('strong').textContent = m.name;
+    row.querySelector('small').textContent  = m.distanceKm + ' km away';
+    row.querySelector('.price').innerHTML   = '₹' + fmt(m.livePrice ?? m.pricePerQuintal)
+      + '<div class="movement ' + dir + '">' + arrow + ' ₹' + Math.abs(change) + ' today</div>'
+      + '<div class="range">Low ₹' + fmt(m.dayLow) + ' · High ₹' + fmt(m.dayHigh) + '</div>';
+    row.querySelectorAll('small')[1].textContent = '₹' + fmt(m.transportCost) + ' trip';
+    const badge = row.querySelector('.best');
+    if (badge) badge.textContent = i === 0 ? 'BEST PROFIT' : '';
   });
-  const best = markets[0]; const price = best.livePrice ?? best.pricePerQuintal;
-  const net = price * quantity - best.transportCost;
-  document.querySelector('.profit-number').innerHTML = `₹${fmt(net)} <small>net</small>`;
-  document.querySelector('.profit p').textContent = `After ₹${fmt(best.transportCost)} shared transport cost`;
-  document.querySelector('.profit footer').innerHTML = `<span>Market price ₹${fmt(price * 40)}</span><span>${Math.round(net / (price * 40) * 100)}% kept</span>`;
+  const best  = markets[0];
+  const price = best.livePrice ?? best.pricePerQuintal;
+  const net   = price * quantity - best.transportCost;
+  document.querySelector('.profit-number').innerHTML = '₹' + fmt(net) + ' <small>net</small>';
+  document.querySelector('.profit p').textContent    = 'After ₹' + fmt(best.transportCost) + ' shared transport cost';
+  document.querySelector('.profit footer').innerHTML =
+    '<span>Market price ₹' + fmt(price * 40) + '</span><span>' + Math.round(net / (price * 40) * 100) + '% kept</span>';
 }
+
 async function loadMarketData() {
-  const response = await fetch(`/api/markets?crop=${encodeURIComponent(selectedCrop)}&quantity=${quantity}`);
-  if (!response.ok) throw new Error('Could not load market data');
-  const data = await response.json();
-  liveMarkets = data.markets.map((market, index) => ({ ...market, livePrice: market.pricePerQuintal, liveChange: [18, -12, 25][index], dayLow: market.pricePerQuintal - [28, 35, 30][index], dayHigh: market.pricePerQuintal + [45, 22, 52][index] }));
-  renderMarkets(liveMarkets); document.getElementById('updatedAt').textContent = `· updated ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`;
+  const res = await fetch('/api/markets?crop=' + encodeURIComponent(selectedCrop) + '&quantity=' + quantity);
+  if (!res.ok) throw new Error('Could not load market data');
+  const data = await res.json();
+  liveMarkets = data.markets.map((m, i) => ({
+    ...m,
+    livePrice  : m.pricePerQuintal,
+    liveChange : [18, -12, 25][i],
+    dayLow     : m.pricePerQuintal - [28, 35, 30][i],
+    dayHigh    : m.pricePerQuintal + [45, 22, 52][i]
+  }));
+  renderMarkets(liveMarkets);
+  document.getElementById('updatedAt').textContent = '· updated ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
 }
-function simulateLiveTick() { if (!liveMarkets.length) return; liveMarkets = liveMarkets.map(market => { const movement = Math.floor(Math.random() * 15) - 6; const livePrice = Math.max(market.dayLow, Math.min(market.dayHigh, market.livePrice + movement)); return { ...market, livePrice, liveChange: livePrice - market.pricePerQuintal }; }); renderMarkets(liveMarkets); document.getElementById('updatedAt').textContent = `· updated ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`; }
-document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active')}));
-document.getElementById('cropSearch').addEventListener('submit', async event => { event.preventDefault(); const crop = document.getElementById('cropInput').value.trim().toLowerCase(); if (!crop) return; selectedCrop = crop; const button = event.currentTarget.querySelector('button'); button.textContent = 'Loading…'; button.disabled = true; try { await loadMarketData(); document.getElementById('selectedCrop').textContent = `${crop.charAt(0).toUpperCase() + crop.slice(1)} · ${quantity} qtl`; } catch { alert('We currently support wheat, rice, mustard, sugarcane, maize, potato, cotton, and tomato.'); } finally { button.textContent = 'Search live price'; button.disabled = false; } });
-let joinedPickup = false; let pendingPickup = false; let selectedTripId = 'azadpur-1530'; let selectedTruck = { capacity: '100', vehicle: 'DL 1L 4728', time: '3:30 PM' };
-const pickupButton = document.getElementById('joinButton');
-document.querySelectorAll('.truck-option').forEach(option => option.addEventListener('click', () => { if (joinedPickup || pendingPickup) return; document.querySelectorAll('.truck-option').forEach(item => item.classList.remove('active')); option.classList.add('active'); selectedTripId = option.dataset.trip; selectedTruck = { capacity: option.dataset.capacity, vehicle: option.dataset.vehicle, time: option.dataset.time }; document.getElementById('truckInfo').textContent = `${selectedTruck.capacity}-ton truck · Pickup today, ${selectedTruck.time}`; document.getElementById('liveVehicle').textContent = selectedTruck.vehicle; }));
-function showJoinState() { joinedPickup = false; pickupButton.textContent = 'Join pickup'; pickupButton.style.background = '#1d6b4f'; document.querySelector('.pickup-live').classList.remove('is-visible'); }
-function showJoinedState() { joinedPickup = true; pickupButton.textContent = 'Leave truck'; pickupButton.style.background = '#805900'; document.querySelector('.pickup-live').classList.add('is-visible'); document.querySelector('.pickup-live').scrollIntoView({behavior:'smooth',block:'nearest'}); }
-pickupButton.addEventListener('click', async () => {
-  pickupButton.disabled = true;
-  if (joinedPickup) {
-    pickupButton.textContent = 'Leaving…';
-    showJoinState();
-    try { await fetch(`/api/transport/${selectedTripId}/leave`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({quantityQuintals:4}) }); }
-    catch { console.info('Demo mode: pickup removed locally.'); }
-    finally { pickupButton.disabled = false; }
-    return;
-  }
-  // Reset any prior error state
-  pickupButton.style.background = '';
-  pickupButton.textContent = 'Reserving…';
+
+function simulateLiveTick() {
+  if (!liveMarkets.length) return;
+  liveMarkets = liveMarkets.map(m => {
+    const move      = Math.floor(Math.random() * 15) - 6;
+    const livePrice = Math.max(m.dayLow, Math.min(m.dayHigh, m.livePrice + move));
+    return { ...m, livePrice, liveChange: livePrice - m.pricePerQuintal };
+  });
+  renderMarkets(liveMarkets);
+  document.getElementById('updatedAt').textContent = '· updated ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+}
+
+document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+}));
+
+document.getElementById('cropSearch').addEventListener('submit', async e => {
+  e.preventDefault();
+  const crop = document.getElementById('cropInput').value.trim().toLowerCase();
+  if (!crop) return;
+  selectedCrop = crop;
+  const btn = e.currentTarget.querySelector('button');
+  btn.textContent = 'Loading…'; btn.disabled = true;
   try {
-    const response = await fetch(`/api/transport/${selectedTripId}/join`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({farmerName:'Ramesh',quantityQuintals:4}) });
-    if (!response.ok) {
-      // 404/405/non-JSON = no backend (GitHub Pages static host) - use demo mode
-      const ct = response.headers.get('content-type') || '';
-      if (!ct.includes('application/json') || response.status === 404 || response.status === 405) {
-        console.info('Demo mode: no backend detected, opening payment locally.');
-        pendingPickup = true;
-        pickupButton.textContent = 'Complete payment';
-        document.getElementById('paymentModal').classList.add('open');
-        return;
+    await loadMarketData();
+    document.getElementById('selectedCrop').textContent = crop.charAt(0).toUpperCase() + crop.slice(1) + ' · ' + quantity + ' qtl';
+  } catch { alert('We currently support wheat, rice, mustard, sugarcane, maize, potato, cotton, and tomato.'); }
+  finally { btn.textContent = 'Search live price'; btn.disabled = false; }
+});
+
+// ── Pickup state machine ─────────────────────────────────────────
+// States: 'idle' | 'booked'
+let pickupState  = 'idle';
+let selectedTripId = 'azadpur-1530';
+let selectedTruck  = { capacity: '100', vehicle: 'DL 1L 4728', time: '3:30 PM' };
+let pendingPayment = false;
+
+const pickupBtn       = document.getElementById('joinButton');
+const pickupLiveCard  = document.querySelector('.pickup-live');
+const cancelWrap      = document.getElementById('cancelBookingWrap');
+const cancelBookingBtn= document.getElementById('cancelBookingBtn');
+const bookingInfoEl   = document.getElementById('bookingInfo');
+
+// Truck selector
+document.querySelectorAll('.truck-option').forEach(opt => opt.addEventListener('click', () => {
+  if (pickupState === 'booked') return; // locked while booked
+  document.querySelectorAll('.truck-option').forEach(o => o.classList.remove('active'));
+  opt.classList.add('active');
+  selectedTripId = opt.dataset.trip;
+  selectedTruck  = { capacity: opt.dataset.capacity, vehicle: opt.dataset.vehicle, time: opt.dataset.time };
+  document.getElementById('truckInfo').textContent = selectedTruck.capacity + '-ton truck · Pickup today, ' + selectedTruck.time;
+  document.getElementById('liveVehicle').textContent = selectedTruck.vehicle;
+}));
+
+function setIdleState() {
+  pickupState    = 'idle';
+  pendingPayment = false;
+  pickupBtn.textContent     = 'Join pickup';
+  pickupBtn.style.background = '#1d6b4f';
+  pickupBtn.style.color      = '#fff';
+  pickupBtn.disabled         = false;
+  pickupLiveCard.classList.remove('is-visible');
+  cancelWrap.style.display   = 'none';
+  document.querySelectorAll('.truck-option').forEach(o => (o.disabled = false));
+}
+
+function setBookedState() {
+  pickupState = 'booked';
+  pickupBtn.textContent      = '✓ Booked';
+  pickupBtn.style.background = '#2bb36c';
+  pickupBtn.style.color      = '#fff';
+  pickupBtn.disabled         = true; // can only cancel via cancel button
+  pickupLiveCard.classList.add('is-visible');
+  cancelWrap.style.display   = 'block';
+  bookingInfoEl.textContent  = 'Vehicle: ' + selectedTruck.vehicle + ' · Today, ' + selectedTruck.time;
+  document.getElementById('liveVehicle').textContent = selectedTruck.vehicle;
+  document.querySelectorAll('.truck-option').forEach(o => (o.disabled = true));
+  pickupLiveCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Main join button click
+pickupBtn.addEventListener('click', async () => {
+  if (pickupState === 'booked') return; // safety guard
+  pickupBtn.disabled = true;
+  pickupBtn.style.background = '';
+  pickupBtn.textContent = 'Reserving…';
+
+  // Try backend; any non-JSON / 404 / 405 / TypeError → demo mode
+  let demoMode = false;
+  try {
+    const res = await fetch('/api/transport/' + selectedTripId + '/join', {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify({ farmerName: signedInFarmer.name || 'Ramesh', quantityQuintals: 4 })
+    });
+    const ct = res.headers.get('content-type') || '';
+    if (!res.ok) {
+      if (!ct.includes('application/json') || res.status === 404 || res.status === 405) {
+        demoMode = true; // no backend
+      } else {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Pickup unavailable');
       }
-      const errData = await response.json().catch(() => ({}));
-      throw new Error(errData.error || 'Pickup unavailable');
     }
-    pendingPickup = true;
-    pickupButton.textContent = 'Complete payment';
-    document.getElementById('paymentModal').classList.add('open');
   } catch (err) {
     if (err instanceof TypeError) {
-      // No server running — fall back to demo mode
-      console.info('Demo mode: proceeding without server.');
-      pendingPickup = true;
-      pickupButton.textContent = 'Complete payment';
-      document.getElementById('paymentModal').classList.add('open');
+      demoMode = true; // network error = no server
     } else {
-      // Real error (e.g. capacity full) — show message, auto-reset after 2 s
-      pickupButton.textContent = err.message || 'Try again';
-      pickupButton.style.background = '#b45c3f';
+      // Real server error — show it, reset after 2 s
+      pickupBtn.textContent      = err.message || 'Try again';
+      pickupBtn.style.background = '#b45c3f';
       setTimeout(() => {
-        pickupButton.textContent = 'Join pickup';
-        pickupButton.style.background = '';
-        pickupButton.disabled = false;
+        pickupBtn.textContent      = 'Join pickup';
+        pickupBtn.style.background = '#1d6b4f';
+        pickupBtn.disabled         = false;
       }, 2000);
       return;
     }
-  } finally { pickupButton.disabled = false; }
-});const paymentModal = document.getElementById('paymentModal');
-document.querySelectorAll('.pay-method').forEach(method => method.addEventListener('click', () => { document.querySelectorAll('.pay-method').forEach(item => item.classList.remove('active')); method.classList.add('active'); document.getElementById('confirmPayment').textContent = `Pay ₹240 with ${method.dataset.method}`; }));
-async function cancelPendingPickup() { paymentModal.classList.remove('open'); if (!pendingPickup) return; pendingPickup = false; await fetch(`/api/transport/${selectedTripId}/leave`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({quantityQuintals:4}) }).catch(() => {}); showJoinState(); }
-document.getElementById('copyUpi').addEventListener('click', () => { navigator.clipboard.writeText('mr.net445-4@oksbi').then(() => { const b = document.getElementById('copyUpi'); b.textContent = 'Copied!'; b.classList.add('copied'); setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('copied'); }, 2000); }); });
+  }
+
+  if (demoMode) console.info('FasalSetu demo mode — running without backend.');
+  // Show payment modal
+  pendingPayment = true;
+  pickupBtn.textContent = 'Complete payment';
+  pickupBtn.disabled    = false;
+  document.getElementById('paymentModal').classList.add('open');
+});
+
+// Cancel booking button (inside live-pickup card)
+cancelBookingBtn.addEventListener('click', async () => {
+  if (!confirm('Cancel your pickup booking?')) return;
+  cancelBookingBtn.textContent = 'Cancelling…';
+  cancelBookingBtn.disabled    = true;
+  try {
+    await fetch('/api/transport/' + selectedTripId + '/leave', {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify({ quantityQuintals: 4 })
+    });
+  } catch { /* demo mode — ignore network errors */ }
+  setIdleState();
+});
+
+// ── Payment modal ────────────────────────────────────────────────
+const paymentModal = document.getElementById('paymentModal');
+
+document.querySelectorAll('.pay-method').forEach(m => m.addEventListener('click', () => {
+  document.querySelectorAll('.pay-method').forEach(x => x.classList.remove('active'));
+  m.classList.add('active');
+  document.getElementById('confirmPayment').textContent = 'Pay ₹240 with ' + (m.dataset.method || 'UPI');
+}));
+
+document.getElementById('copyUpi').addEventListener('click', () => {
+  navigator.clipboard.writeText('mr.net445-4@oksbi').then(() => {
+    const b = document.getElementById('copyUpi');
+    b.textContent = 'Copied!'; b.classList.add('copied');
+    setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('copied'); }, 2000);
+  });
+});
+
+async function cancelPendingPickup() {
+  paymentModal.classList.remove('open');
+  if (!pendingPayment) return;
+  pendingPayment = false;
+  try {
+    await fetch('/api/transport/' + selectedTripId + '/leave', {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify({ quantityQuintals: 4 })
+    });
+  } catch { /* demo mode */ }
+  setIdleState();
+}
+
+document.getElementById('cancelPayment').addEventListener('click', cancelPendingPickup);
+document.getElementById('closePayment').addEventListener('click', cancelPendingPickup);
+paymentModal.addEventListener('click', e => { if (e.target === e.currentTarget) cancelPendingPickup(); });
+
+// Confirm payment → show receipt → transition to booked state
 document.getElementById('confirmPayment').addEventListener('click', () => {
-  pendingPickup = false; paymentModal.classList.remove('open');
+  pendingPayment = false;
+  paymentModal.classList.remove('open');
+
+  // Fill receipt
   const farmer = signedInFarmer.name || 'Ramesh Kumar';
-  const txn = 'FS' + Date.now().toString(36).toUpperCase().slice(-8);
-  const now = new Date().toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
-  document.getElementById('rFarmer').textContent = farmer;
-  document.getElementById('rTxn').textContent = txn;
-  document.getElementById('rDate').textContent = now;
-  document.getElementById('rCrop').textContent = (selectedCrop.charAt(0).toUpperCase()+selectedCrop.slice(1)) + ' \u00b7 4 qtl';
-  const bestMarket = liveMarkets[0];
-  document.getElementById('rMandi').textContent = bestMarket ? bestMarket.name : 'Azadpur Mandi';
+  const txn    = 'FS' + Date.now().toString(36).toUpperCase().slice(-8);
+  const now    = new Date().toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  const bestMkt= liveMarkets[0];
+
+  document.getElementById('rFarmer').textContent  = farmer;
+  document.getElementById('rTxn').textContent     = txn;
+  document.getElementById('rDate').textContent    = now;
+  document.getElementById('rCrop').textContent    = selectedCrop.charAt(0).toUpperCase() + selectedCrop.slice(1) + ' · 4 qtl';
+  document.getElementById('rMandi').textContent   = bestMkt ? bestMkt.name : 'Azadpur Mandi';
   document.getElementById('rVehicle').textContent = selectedTruck.vehicle || 'DL 1L 4728';
   document.getElementById('receiptModal').classList.add('open');
-  showJoinedState();
+
+  // Move to booked state
+  setBookedState();
 });
-document.getElementById('receiptDone').addEventListener('click', () => { document.getElementById('receiptModal').classList.remove('open'); });
-document.getElementById('receiptModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
-document.getElementById('cancelPayment').addEventListener('click', cancelPendingPickup);
-document.getElementById('closePayment').addEventListener('click', cancelPendingPickup);document.getElementById('demoButton').addEventListener('click',()=>alert('Crop → mandi price → transport cost → net payout. FasalSetu makes every step visible.'));
-loadMarketData().then(()=>setInterval(simulateLiveTick, 4000)).catch(()=>console.info('Demo data is shown when the API is offline.'));
+
+document.getElementById('receiptDone').addEventListener('click', () => {
+  document.getElementById('receiptModal').classList.remove('open');
+});
+document.getElementById('receiptModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+});
+
+// ── Misc ─────────────────────────────────────────────────────────
+document.getElementById('demoButton').addEventListener('click', () =>
+  alert('Crop → mandi price → transport cost → net payout. FasalSetu makes every step visible.')
+);
+
+// Load market data + start live ticker
+loadMarketData()
+  .then(() => setInterval(simulateLiveTick, 4000))
+  .catch(() => console.info('Demo data shown — API offline.'));
+
+// Live pickup ETA ticker
 let pickupMinutes = 12;
-setInterval(() => { pickupMinutes = pickupMinutes <= 3 ? 12 : pickupMinutes - 1; document.getElementById('pickupStatus').textContent = `Driver is ${pickupMinutes} min away`; document.getElementById('pickupDistance').textContent = `${(pickupMinutes * 0.4).toFixed(1)} km remaining`; }, 4000);
+setInterval(() => {
+  pickupMinutes = pickupMinutes <= 3 ? 12 : pickupMinutes - 1;
+  document.getElementById('pickupStatus').textContent  = 'Driver is ' + pickupMinutes + ' min away';
+  document.getElementById('pickupDistance').textContent = (pickupMinutes * 0.4).toFixed(1) + ' km remaining';
+}, 4000);
 </script></body></html>
 
 
