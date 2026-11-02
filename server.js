@@ -4,7 +4,7 @@ const path = require('node:path');
 const { URL } = require('node:url');
 
 const PORT = Number(process.env.PORT) || 3000;
-const publicDir = path.join(__dirname, 'outputs');
+const publicDir = path.join(__dirname, 'docs');
 
 const markets = [
   { id: 'azadpur', name: 'Azadpur Mandi', distanceKm: 18, prices: { wheat: 2140, rice: 2780, mustard: 5950, sugarcane: 365, maize: 2110, potato: 1320, cotton: 6720, tomato: 1850 }, transportCost: 320 },
