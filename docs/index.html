@@ -15,7 +15,7 @@ document.getElementById('profileButton').addEventListener('click', event => { ev
 document.getElementById('closeProfile').addEventListener('click', () => profilePanel.classList.remove('open'));
 document.addEventListener('click', event => { if (!profilePanel.contains(event.target) && !document.getElementById('profileButton').contains(event.target)) profilePanel.classList.remove('open'); });
 document.addEventListener('keydown', event => { if (event.key === 'Escape') profilePanel.classList.remove('open'); });
-document.getElementById('logoutButton').addEventListener('click', () => { localStorage.removeItem('fasalsetuUser'); localStorage.removeItem('fasalsetuToken'); location.assign('/login'); });
+document.getElementById('logoutButton').addEventListener('click', () => { localStorage.removeItem('fasalsetuUser'); localStorage.removeItem('fasalsetuToken'); location.assign('./login.html'); });
 document.getElementById('earningsButton').addEventListener('click', () => { document.getElementById('earningsModal').classList.add('open'); document.getElementById('profilePanel').classList.remove('open'); });
 document.getElementById('closeEarnings').addEventListener('click', () => document.getElementById('earningsModal').classList.remove('open'));
 document.getElementById('earningsModal').addEventListener('click', event => { if (event.target === event.currentTarget) event.currentTarget.classList.remove('open'); });
