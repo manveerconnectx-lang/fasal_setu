@@ -91,6 +91,15 @@ pickupButton.addEventListener('click', async () => {
   try {
     const response = await fetch(`/api/transport/${selectedTripId}/join`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({farmerName:'Ramesh',quantityQuintals:4}) });
     if (!response.ok) {
+      // 404/405/non-JSON = no backend (GitHub Pages static host) - use demo mode
+      const ct = response.headers.get('content-type') || '';
+      if (!ct.includes('application/json') || response.status === 404 || response.status === 405) {
+        console.info('Demo mode: no backend detected, opening payment locally.');
+        pendingPickup = true;
+        pickupButton.textContent = 'Complete payment';
+        document.getElementById('paymentModal').classList.add('open');
+        return;
+      }
       const errData = await response.json().catch(() => ({}));
       throw new Error(errData.error || 'Pickup unavailable');
     }
