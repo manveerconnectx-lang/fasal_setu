@@ -1,11 +1,89 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Sign in — FasalSetu</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet"><style>:root{--ink:#17352d;--muted:#687a74;--cream:#f8f5ed;--green:#1d6b4f;--lime:#d7ef72;--line:#dfe5d9}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--ink);background:var(--cream);font-family:"DM Sans",sans-serif;display:grid;place-items:center;padding:24px}.shell{width:min(960px,100%);display:grid;grid-template-columns:1.1fr .9fr;background:#fffdf8;border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 22px 55px #17352d18}.welcome{padding:58px;background:var(--green);color:#fff;position:relative;overflow:hidden}.welcome:after{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-160px;bottom:-175px;background:#2c795c}.mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--lime);color:var(--green);font-size:25px;font-weight:bold}.welcome h1{font:700 46px/.98 Fraunces,serif;letter-spacing:-2px;max-width:360px;margin:68px 0 17px}.welcome p{color:#c6dfcd;line-height:1.6;max-width:350px}.proof{position:relative;z-index:1;margin-top:78px;font-size:13px;color:#d8ebd9}.form-area{padding:52px 44px}.brand{font-size:20px;font-weight:700;letter-spacing:-.7px;margin-bottom:55px}.form-area h2{font:700 31px Fraunces,serif;letter-spacing:-1px;margin:0 0 8px}.sub{color:var(--muted);font-size:14px;margin:0 0 29px}label{display:block;font-size:13px;font-weight:700;margin:16px 0 7px}input{width:100%;padding:12px 13px;border:1px solid #d5ddd2;border-radius:10px;background:#fff;font:inherit;color:var(--ink)}input:focus{outline:2px solid #d7ef72;border-color:var(--green)}button{width:100%;border:0;border-radius:10px;background:var(--green);color:white;padding:13px;font:700 14px "DM Sans",sans-serif;margin-top:23px;cursor:pointer}.demo{font-size:12px;color:var(--muted);margin:20px 0 0;text-align:center}.demo strong{color:var(--green)}.error{min-height:18px;color:#b64235;font-size:12px;margin-top:12px}@media(max-width:720px){.shell{grid-template-columns:1fr}.welcome{padding:30px}.welcome h1{font-size:35px;margin:38px 0 12px}.proof{margin-top:30px}.form-area{padding:34px 27px}.brand{margin-bottom:34px}}</style></head><body><main class="shell"><section class="welcome"><div class="mark">⌁</div><h1>Better markets begin with better information.</h1><p>Compare mandi prices, transport costs, and your real payout—before you sell.</p><div class="proof">Built for farmers. Designed for fairer trade.</div></section><section class="form-area"><div class="brand">FasalSetu</div><h2>Welcome back</h2><p class="sub">Sign in to see today’s best market for your crop.</p><form id="loginForm"><label for="phone">Mobile number</label><input id="phone" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" value="9876543210" required><label for="password">Password</label><input id="password" type="password" placeholder="Enter your password" value="farmer123" required><button type="submit">Sign in to FasalSetu</button><div class="error" id="error" role="alert"></div></form><p class="demo">Demo credentials are pre-filled for the hackathon.</p></section></main><script>
-if (localStorage.getItem('fasalsetuUser')) location.replace('/');
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sign in — FasalSetu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17352d;--muted:#687a74;--cream:#f8f5ed;--green:#1d6b4f;--lime:#d7ef72;--line:#dfe5d9}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);background:var(--cream);font-family:"DM Sans",sans-serif;display:grid;place-items:center;padding:24px}
+.shell{width:min(960px,100%);display:grid;grid-template-columns:1.1fr .9fr;background:#fffdf8;border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 22px 55px #17352d18}
+.welcome{padding:58px;background:var(--green);color:#fff;position:relative;overflow:hidden}
+.welcome:after{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-160px;bottom:-175px;background:#2c795c}
+.mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--lime);color:var(--green);font-size:25px;font-weight:bold}
+.welcome h1{font:700 46px/.98 Fraunces,serif;letter-spacing:-2px;max-width:360px;margin:68px 0 17px}
+.welcome p{color:#c6dfcd;line-height:1.6;max-width:350px}
+.proof{position:relative;z-index:1;margin-top:78px;font-size:13px;color:#d8ebd9}
+.form-area{padding:52px 44px}
+.brand{font-size:20px;font-weight:700;letter-spacing:-.7px;margin-bottom:55px}
+.form-area h2{font:700 31px Fraunces,serif;letter-spacing:-1px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 29px}
+label{display:block;font-size:13px;font-weight:700;margin:16px 0 7px}
+input{width:100%;padding:12px 13px;border:1px solid #d5ddd2;border-radius:10px;background:#fff;font:inherit;color:var(--ink)}
+input:focus{outline:2px solid #d7ef72;border-color:var(--green)}
+button{width:100%;border:0;border-radius:10px;background:var(--green);color:white;padding:13px;font:700 14px "DM Sans",sans-serif;margin-top:23px;cursor:pointer}
+.demo{font-size:12px;color:var(--muted);margin:20px 0 0;text-align:center}
+.demo strong{color:var(--green)}
+.error{min-height:18px;color:#b64235;font-size:12px;margin-top:12px}
+@media(max-width:720px){
+  .shell{grid-template-columns:1fr}
+  .welcome{padding:30px}
+  .welcome h1{font-size:35px;margin:38px 0 12px}
+  .proof{margin-top:30px}
+  .form-area{padding:34px 27px}
+  .brand{margin-bottom:34px}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <section class="welcome">
+    <div class="mark">⌁</div>
+    <h1>Better markets begin with better information.</h1>
+    <p>Compare mandi prices, transport costs, and your real payout—before you sell.</p>
+    <div class="proof">Built for farmers. Designed for fairer trade.</div>
+  </section>
+  <section class="form-area">
+    <div class="brand">FasalSetu</div>
+    <h2>Welcome back</h2>
+    <p class="sub">Sign in to see today's best market for your crop.</p>
+    <form id="loginForm">
+      <label for="phone">Mobile number</label>
+      <input id="phone" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" value="9876543210" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Enter your password" value="farmer123" required>
+      <button type="submit">Sign in to FasalSetu</button>
+      <div class="error" id="error" role="alert"></div>
+    </form>
+    <p class="demo">Demo credentials are pre-filled for the hackathon.</p>
+  </section>
+</main>
+<script>
+// If already logged in, skip login page
+if (localStorage.getItem('fasalsetuUser')) {
+  location.replace('./index.html');
+}
+
+// Demo login — works on GitHub Pages (no backend needed)
+function demoLogin(phone, password) {
+  if (!/^\d{10}$/.test(String(phone))) throw new Error('Enter a valid 10-digit mobile number');
+  if (!String(password).trim()) throw new Error('Enter your password');
+  const user = { name: 'Ramesh Kumar', phone: String(phone), village: 'Bawana, Delhi' };
+  localStorage.setItem('fasalsetuUser', JSON.stringify(user));
+  localStorage.setItem('fasalsetuToken', 'demo-session-fasalsetu');
+  location.assign('./index.html');
+}
 
 document.getElementById('loginForm').addEventListener('submit', async (event) => {
   event.preventDefault();
   const button = event.currentTarget.querySelector('button');
   const error = document.getElementById('error');
+  const phone = document.getElementById('phone').value;
+  const password = document.getElementById('password').value;
   error.textContent = '';
   button.disabled = true;
   button.textContent = 'Signing in…';
@@ -14,16 +92,15 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        phone: document.getElementById('phone').value,
-        password: document.getElementById('password').value
-      })
+      body: JSON.stringify({ phone, password })
     });
 
-    // Fix: check the response type BEFORE calling .json()
     const type = response.headers.get('content-type') || '';
-    if (!type.includes('application/json')) {
-      throw new Error(`Server error (${response.status}). Login route not found.`);
+
+    // GitHub Pages / static host returns 405 for POST — use client-side demo login
+    if (response.status === 405 || !type.includes('application/json')) {
+      demoLogin(phone, password);
+      return;
     }
 
     const data = await response.json();
@@ -31,11 +108,19 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
     localStorage.setItem('fasalsetuUser', JSON.stringify(data.user));
     localStorage.setItem('fasalsetuToken', data.token);
-    location.assign('/');
+    location.assign('./index.html');
+
   } catch (err) {
-    error.textContent = err.message;
+    // Network error (no server running) — fall back to demo login
+    if (err instanceof TypeError) {
+      try { demoLogin(phone, password); return; } catch (e) { error.textContent = e.message; }
+    } else {
+      error.textContent = err.message;
+    }
     button.disabled = false;
     button.textContent = 'Sign in to FasalSetu';
   }
 });
-</script></body></html>
+</script>
+</body>
+</html>
