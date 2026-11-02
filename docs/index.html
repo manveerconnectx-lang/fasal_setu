@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>FasalSetu — Sell smarter, earn more</title>
@@ -85,13 +85,37 @@ pickupButton.addEventListener('click', async () => {
     finally { pickupButton.disabled = false; }
     return;
   }
+  // Reset any prior error state
+  pickupButton.style.background = '';
   pickupButton.textContent = 'Reserving…';
   try {
     const response = await fetch(`/api/transport/${selectedTripId}/join`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({farmerName:'Ramesh',quantityQuintals:4}) });
-    if (!response.ok) throw new Error();
-    pendingPickup = true; pickupButton.textContent = 'Complete payment'; document.getElementById('paymentModal').classList.add('open');
-  } catch { pickupButton.textContent = 'Try again'; pickupButton.style.background = '#b45c3f'; }
-  finally { pickupButton.disabled = false; }
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error || 'Pickup unavailable');
+    }
+    pendingPickup = true;
+    pickupButton.textContent = 'Complete payment';
+    document.getElementById('paymentModal').classList.add('open');
+  } catch (err) {
+    if (err instanceof TypeError) {
+      // No server running — fall back to demo mode
+      console.info('Demo mode: proceeding without server.');
+      pendingPickup = true;
+      pickupButton.textContent = 'Complete payment';
+      document.getElementById('paymentModal').classList.add('open');
+    } else {
+      // Real error (e.g. capacity full) — show message, auto-reset after 2 s
+      pickupButton.textContent = err.message || 'Try again';
+      pickupButton.style.background = '#b45c3f';
+      setTimeout(() => {
+        pickupButton.textContent = 'Join pickup';
+        pickupButton.style.background = '';
+        pickupButton.disabled = false;
+      }, 2000);
+      return;
+    }
+  } finally { pickupButton.disabled = false; }
 });const paymentModal = document.getElementById('paymentModal');
 document.querySelectorAll('.pay-method').forEach(method => method.addEventListener('click', () => { document.querySelectorAll('.pay-method').forEach(item => item.classList.remove('active')); method.classList.add('active'); document.getElementById('confirmPayment').textContent = `Pay ₹240 with ${method.dataset.method}`; }));
 async function cancelPendingPickup() { paymentModal.classList.remove('open'); if (!pendingPickup) return; pendingPickup = false; await fetch(`/api/transport/${selectedTripId}/leave`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({quantityQuintals:4}) }).catch(() => {}); showJoinState(); }
