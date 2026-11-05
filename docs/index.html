@@ -343,6 +343,10 @@ setInterval(() => {
   const tukStatusStyle = document.createElement('style');
   tukStatusStyle.textContent = `.tuk-tuk-card{flex-wrap:wrap}.tuk-driver{display:none;width:100%;margin-top:2px;padding:11px 13px;background:#fffdf8;border:1px solid #c7e3bd;border-radius:10px;font-size:12px;color:var(--ink)}.tuk-driver strong{display:block;color:var(--green);margin-bottom:3px}.tuk-arrived{background:#dff2ba!important;color:var(--green)!important}`;
   document.head.append(tukStatusStyle);
+  const avatarStyle = document.createElement('style');
+  avatarStyle.textContent = `.avatar.profile-photo{overflow:hidden;background:#d7ef72;padding:0}.avatar.profile-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}`;
+  document.head.append(avatarStyle);
+  document.querySelectorAll('.avatar').forEach(avatar => { avatar.classList.add('profile-photo'); avatar.innerHTML = '<img src="./farmer-profile.jpg" alt="Ramesh Kumar profile photo">'; });
   const nav = document.querySelector('nav');
   if (nav) nav.innerHTML = '<a href="#markets">Mandi prices</a><a href="#calculator">Profit calculator</a><a href="#transport">Shared transport</a><a href="#how">How it works</a>';
   const lang = document.querySelector('.language');
