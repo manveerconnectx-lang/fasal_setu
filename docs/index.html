@@ -355,9 +355,9 @@ setInterval(() => {
     tukCard.insertAdjacentHTML('beforeend', '<div class="tuk-driver" id="tukDriver"><strong id="tukStatus">Booking confirmed · driver on the way</strong><span>Driver: Mahesh Kumar · <a href="tel:9876543210">Call 98765 43210</a><br>Vehicle: Tuk-tuk DL 1R 6342 · <span id="tukEta">Arrives in about 45 min</span></span></div>');
     let tukTimerStarted = false, tukArrivalAt = 0;
     setInterval(() => {
-      if (pickupState !== 'booked' || selectedTripId !== 'tuktuk') return;
+      if (pickupState !== 'booked' || selectedTripId !== 'tuktuk') { pickupBtn.style.display = ''; return; }
       const button = document.getElementById('tuktukBook'), driver = document.getElementById('tukDriver');
-      driver.style.display = 'block'; button.textContent = '✓ Tuk-tuk booked'; button.disabled = true;
+      driver.style.display = 'block'; button.textContent = '✓ Tuk-tuk booked'; button.disabled = true; pickupBtn.style.display = 'none';
       if (!tukTimerStarted) { tukTimerStarted = true; tukArrivalAt = Date.now() + 45 * 60 * 1000; }
       const remaining = Math.max(0, Math.ceil((tukArrivalAt - Date.now()) / 60000));
       if (remaining) { document.getElementById('tukEta').textContent = 'Arrives in about ' + remaining + ' min'; document.getElementById('pickupStatus').textContent = 'Tuk-tuk arrives in ' + remaining + ' min'; }
