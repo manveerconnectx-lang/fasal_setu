@@ -40,6 +40,7 @@ http.createServer(async (req, res) => {
       pickupBookings.push(booking); return send(res, 201, { message: 'Pickup reserved', reservation: booking });
     } catch (e) { return send(res, 400, { error: e.message }); }
   }
+  if (req.method === 'GET' && url.pathname === '/farmer-profile.jpg') return fs.readFile(path.join(publicDir, 'farmer-profile.jpg'), (e, file) => e ? send(res, 404, { error: 'Profile photo not found' }) : send(res, 200, file, 'image/jpeg'));
   if (req.method === 'GET' && (url.pathname === '/' || url.pathname === '/index.html')) return fs.readFile(path.join(publicDir, 'index.html'), (e, file) => e ? send(res, 404, { error: 'Frontend not found' }) : send(res, 200, file, 'text/html; charset=utf-8'));
   return send(res, 404, { error: 'Route not found' });
 }).listen(PORT, () => console.log(`FasalSetu running at http://localhost:${PORT}`));
