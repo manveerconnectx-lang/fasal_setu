@@ -340,6 +340,9 @@ setInterval(() => {
   const featureStyle = document.createElement('style');
   featureStyle.textContent = `#calculator{background:var(--green)!important;color:#fff;border-color:var(--green)}#calculator h2{font:700 16px "DM Sans",sans-serif;letter-spacing:0;color:#fff}#calculator p{color:#fff}#calculator .farm-form label{color:#d5e9d8}#calculator .calc-result{background:#f1f8ed;color:var(--ink)}.tuk-tuk-card{background:#eef8e7!important;border-color:#c7e3bd!important}.tuk-tuk-card .truck{background:#d7ef72}.tuk-tuk-card p{color:#52755d!important}.tuk-tuk-card .join{background:#176447}@media(max-width:680px){.tuk-tuk-card{grid-column:auto!important}}`;
   document.head.append(featureStyle);
+  const tukStatusStyle = document.createElement('style');
+  tukStatusStyle.textContent = `.tuk-tuk-card{flex-wrap:wrap}.tuk-driver{display:none;width:100%;margin-top:2px;padding:11px 13px;background:#fffdf8;border:1px solid #c7e3bd;border-radius:10px;font-size:12px;color:var(--ink)}.tuk-driver strong{display:block;color:var(--green);margin-bottom:3px}.tuk-arrived{background:#dff2ba!important;color:var(--green)!important}`;
+  document.head.append(tukStatusStyle);
   const nav = document.querySelector('nav');
   if (nav) nav.innerHTML = '<a href="#markets">Mandi prices</a><a href="#calculator">Profit calculator</a><a href="#transport">Shared transport</a><a href="#how">How it works</a>';
   const lang = document.querySelector('.language');
@@ -347,6 +350,20 @@ setInterval(() => {
   const transportChoices = document.querySelector('.truck-options');
   const truckCard = document.getElementById('transport');
   if (truckCard) { truckCard.insertAdjacentHTML('afterend', '<article class="card transport tuk-tuk-card" id="tuktukPickup"><div class="truck">🛺</div><div class="transport-copy"><h3>Tuk-tuk pickup</h3><p>Low-cost pickup for small harvests and farm supplies · Up to 500 kg · Available within 45 min</p><div class="truck-options"><button class="truck-option active">₹90 starting fare</button><button class="truck-option">Best for nearby delivery</button></div></div><button class="join" id="tuktukBook">Book tuk-tuk</button></article>'); document.getElementById('tuktukBook').onclick=()=>{ selectedTripId='tuktuk'; selectedTruck={capacity:'500 kg',vehicle:'Tuk-tuk delivery',time:'within 45 min'}; document.getElementById('truckInfo').textContent='Tuk-tuk · 500 kg capacity · Pickup within 45 min'; document.getElementById('liveVehicle').textContent=selectedTruck.vehicle; pickupBtn.click(); }; }
+  const tukCard = document.getElementById('tuktukPickup');
+  if (tukCard) {
+    tukCard.insertAdjacentHTML('beforeend', '<div class="tuk-driver" id="tukDriver"><strong id="tukStatus">Booking confirmed · driver on the way</strong><span>Driver: Mahesh Kumar · <a href="tel:9876543210">Call 98765 43210</a><br>Vehicle: Tuk-tuk DL 1R 6342 · <span id="tukEta">Arrives in about 45 min</span></span></div>');
+    let tukTimerStarted = false, tukArrivalAt = 0;
+    setInterval(() => {
+      if (pickupState !== 'booked' || selectedTripId !== 'tuktuk') return;
+      const button = document.getElementById('tuktukBook'), driver = document.getElementById('tukDriver');
+      driver.style.display = 'block'; button.textContent = '✓ Tuk-tuk booked'; button.disabled = true;
+      if (!tukTimerStarted) { tukTimerStarted = true; tukArrivalAt = Date.now() + 45 * 60 * 1000; }
+      const remaining = Math.max(0, Math.ceil((tukArrivalAt - Date.now()) / 60000));
+      if (remaining) { document.getElementById('tukEta').textContent = 'Arrives in about ' + remaining + ' min'; document.getElementById('pickupStatus').textContent = 'Tuk-tuk arrives in ' + remaining + ' min'; }
+      else { document.getElementById('tukStatus').textContent = '✓ Arrived at your pickup point'; document.getElementById('tukEta').textContent = 'Driver has arrived'; document.getElementById('pickupStatus').textContent = 'Tuk-tuk has arrived'; document.getElementById('pickupDistance').textContent = 'At your pickup point'; button.textContent = '✓ Arrived'; button.classList.add('tuk-arrived'); }
+    }, 1000);
+  }
   const bottom = document.querySelector('.bottom');
   if (bottom) bottom.insertAdjacentHTML('afterend', `<section class="extension"><div class="extension-grid"><article class="card" id="calculator"><h2>Profit & margin calculator</h2><p>Enter your farm costs to see your estimated profit after mandi transport.</p><div class="farm-form"><label>Crop / फसल<select id="calcCrop"><option>wheat</option><option>rice</option><option>mustard</option><option>maize</option><option>potato</option><option>tomato</option></select></label><label>Quantity (quintal)<input id="calcQty" type="number" min=".1" value="10"></label><label>Growing cost (₹)<input id="calcCost" type="number" min="0" value="12000"></label><label>Mandi<select id="calcMandi"><option value="azadpur">Azadpur Mandi</option><option value="narela">Narela Mandi</option><option value="sonipat">Sonipat Mandi</option></select></label></div><button class="join" id="calcButton" style="margin:13px 0 0">Calculate profit / लाभ देखें</button><div class="calc-result" id="calcResult"></div></article><article class="card" id="pesticides"><h2>Pesticides & delivery</h2><p>Select a pesticide, then book the lowest-cost tuk-tuk or suitable truck.</p><div class="pesticide-list" id="pesticideList"></div><div class="farm-form" style="margin-top:10px"><label>Delivery distance (km)<input id="deliveryKm" type="number" min="1" value="5"></label><label>Vehicle<select id="deliveryVehicle"><option value="tuktuk">🛺 Tuk-tuk — lowest cost</option><option value="mini-truck">🚚 Mini truck</option><option value="truck">🚛 Full truck</option></select></label></div><button class="join" id="deliveryButton" style="margin:13px 0 0">Book pesticide delivery</button><div class="delivery-result" id="deliveryResult"></div></article></div></section>`);
   document.getElementById('pesticides')?.remove();

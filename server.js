@@ -18,6 +18,7 @@ const vehicles = [
 const pesticides = [
   { id: 'neem', name: 'Neem Guard Bio-pesticide', category: 'Organic', price: 320, unit: '1 L', badge: 'Low toxicity' }, { id: 'fungi', name: 'CropShield Fungicide', category: 'Fungicide', price: 540, unit: '500 g', badge: 'Best seller' }, { id: 'insect', name: 'Kisan Insect Control', category: 'Insecticide', price: 460, unit: '1 L', badge: 'For sucking pests' }, { id: 'weed', name: 'FieldClear Weed Control', category: 'Herbicide', price: 690, unit: '1 L', badge: 'Post-emergence' }, { id: 'micro', name: 'Micro Nutrient Mix', category: 'Plant health', price: 385, unit: '1 kg', badge: 'Crop booster' }, { id: 'trap', name: 'Pheromone Trap Pack', category: 'Organic', price: 275, unit: '10 traps', badge: 'Chemical-free' }
 ];
+const pickupBookings = [];
 function send(res, status, data, type = 'application/json; charset=utf-8') { res.writeHead(status, { 'Content-Type': type, 'Access-Control-Allow-Origin': '*' }); res.end(type.includes('json') ? JSON.stringify(data) : data); }
 function body(req) { return new Promise((resolve, reject) => { let raw = ''; req.on('data', c => raw += c); req.on('end', () => { try { resolve(raw ? JSON.parse(raw) : {}); } catch { reject(new Error('Invalid JSON')); } }); }); }
 const fee = (v, km) => v.baseFee + v.perKm * Math.max(1, Number(km) || 1);
@@ -30,6 +31,15 @@ http.createServer(async (req, res) => {
   if (req.method === 'GET' && url.pathname === '/api/vehicles') { const km = Number(url.searchParams.get('distanceKm')) || 8, kg = Number(url.searchParams.get('weightKg')) || 1; return send(res, 200, { vehicles: vehicles.filter(v => kg <= v.capacityKg).map(v => ({ ...v, price: fee(v, km) })) }); }
   if (req.method === 'GET' && url.pathname === '/api/pesticides') return send(res, 200, { pesticides });
   if (req.method === 'POST' && url.pathname === '/api/deliveries') { try { const d = await body(req), p = pesticides.find(x => x.id === d.pesticideId), v = vehicles.find(x => x.id === d.vehicleId); if (!p || !v) return send(res, 400, { error: 'Choose a pesticide and vehicle' }); const deliveryFee = fee(v, d.distanceKm), total = deliveryFee + p.price * Math.max(1, Number(d.quantity) || 1); return send(res, 201, { bookingId: `FS-${Date.now().toString(36).toUpperCase()}`, pesticide: p, vehicle: v.label, deliveryFee, total, eta: v.eta }); } catch (e) { return send(res, 400, { error: e.message }); } }
+  const pickupMatch = url.pathname.match(/^\/api\/transport\/([^/]+)\/(join|leave)$/);
+  if (req.method === 'POST' && pickupMatch) {
+    try {
+      const data = await body(req), [, tripId, action] = pickupMatch;
+      if (action === 'leave') { const index = pickupBookings.findIndex(b => b.tripId === tripId); if (index >= 0) pickupBookings.splice(index, 1); return send(res, 200, { message: 'Pickup cancelled' }); }
+      const booking = { bookingId: `PK-${Date.now().toString(36).toUpperCase()}`, tripId, farmerName: data.farmerName || 'Farmer', quantityQuintals: Math.max(1, Number(data.quantityQuintals) || 1), status: 'booked', driver: tripId === 'tuktuk' ? { name: 'Mahesh Kumar', phone: '98765 43210', vehicle: 'Tuk-tuk DL 1R 6342', etaMinutes: 45 } : { name: 'Ravi Singh', phone: '98765 44012', vehicle: 'Shared pickup truck', etaMinutes: 30 } };
+      pickupBookings.push(booking); return send(res, 201, { message: 'Pickup reserved', reservation: booking });
+    } catch (e) { return send(res, 400, { error: e.message }); }
+  }
   if (req.method === 'GET' && (url.pathname === '/' || url.pathname === '/index.html')) return fs.readFile(path.join(publicDir, 'index.html'), (e, file) => e ? send(res, 404, { error: 'Frontend not found' }) : send(res, 200, file, 'text/html; charset=utf-8'));
   return send(res, 404, { error: 'Route not found' });
 }).listen(PORT, () => console.log(`FasalSetu running at http://localhost:${PORT}`));
